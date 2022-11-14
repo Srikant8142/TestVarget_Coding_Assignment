@@ -1,0 +1,76 @@
+public class IPLTeam implements Comparable<IPLTeam>{
+    private int number_of_matches;
+    private double nrr;
+    private int total_points;
+    private double ppm;
+    private int number_wins;
+    public IPLTeam(int number_of_matches, double nrr, int total_points){
+        this.number_of_matches = number_of_matches;
+        this.nrr = nrr;
+        this.total_points = total_points;
+        this.ppm = (double) total_points / number_of_matches;
+        this.number_wins = total_points / 2;
+    }
+    @Override
+    public int compareTo(IPLTeam o) {
+        if(o.getPpm() == this.ppm){
+            if((this.number_wins / 3) == (o.getNumber_wins() / 3)){
+                if(this.nrr == o.getNrr()){
+                    return 0;
+                }
+                else if(this.nrr > o.nrr){
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+            }
+            else if((this.number_wins / 3) > (o.getNumber_wins() / 3)){
+                return 1;
+            }
+            else{
+                return -1;
+            }
+        }
+        else if(this.ppm > o.getPpm()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    public double getNrr() {
+        return nrr;
+    }
+
+    public int getNumber_of_matches() {
+        return number_of_matches;
+    }
+
+    public double getPpm() {
+        return ppm;
+    }
+
+    public int getTotal_points() {
+        return total_points;
+    }
+
+    public int getNumber_wins() {
+        return number_wins;
+    }
+
+    public static void main(String[] args) {
+        IPLTeam CSK = new IPLTeam(14,0.466,20);
+        IPLTeam MI = new IPLTeam(14,0.237,18);
+        if(CSK.compareTo(MI) == 0){
+            System.out.println("Both Teams are Equal");
+        }
+        else if(CSK.compareTo(MI) == 1){
+            System.out.println("CSK is better than MI");
+        }
+        else{
+            System.out.println("MI IS better than CSK");
+        }
+    }
+}
